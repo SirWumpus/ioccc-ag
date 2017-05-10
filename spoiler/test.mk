@@ -4,13 +4,19 @@
 #	Public Domain 1992, 1993 by Anthony Howe.  No warranty.
 #
 
-all :	char word anchor literal wild closure option branch sub class
+PRG	= ./ag
+SHELL	= /bin/sh
+
+all: ag char word anchor literal wild closure option branch sub class
+
+ag: ag.c
+	${CC} -o ${PRG} ${PRG}.c
 
 #
 # Test simple text patterns without the use of meta characters.
 #
 
-empty: 
+empty:
 	$(PRG) '' test.mk
 
 char:
@@ -29,13 +35,13 @@ anchor1:
 	$(PRG) '^anchor1' test.mk
 
 anchor2:
-	$(PRG) 'Grep$' test.mk
+	$(PRG) 'Grep$$' test.mk
 
 #
 # Find all empty lines.
 #
 anchor3:
-	$(PRG) '^$' test.mk
+	$(PRG) '^$$' test.mk
 
 #
 # This is valid but will never match.
@@ -47,18 +53,18 @@ anchor4:
 # This is valid but will never match.
 #
 anchor5:
-	-$(PRG) 'mk$x' test.mk
+	-$(PRG) 'mk$$x' test.mk
 
 literal: literal1 literal2
 
 #
-# Every line with a dollar-sign.	
+# Every line with a dollar-sign.
 #
 literal1:
-	$(PRG) '\$' test.mk
+	$(PRG) '\$$' test.mk
 
 #
-# Every line with a backslash.	
+# Every line with a backslash.
 #
 literal2:
 	$(PRG) '\\' test.mk
@@ -103,7 +109,7 @@ branch1:
 # This pattern should be the same as '(^all)|(Public)|(Grep$)'.
 #
 branch2:
-	$(PRG) '^all|Public|Grep$' test.mk
+	$(PRG) '^all|Public|Grep$$' test.mk
 
 #
 # This pattern should generate the same results as branch2.
