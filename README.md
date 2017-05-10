@@ -351,15 +351,7 @@ Prentice Hall, 87, ISBN 0-13-822305-X, chaper 4
 * POSIX.2 Standard, 2.8.4 Extended Regular Expressions, 4.28 Grep
 
 
-## 11. FILES
-
-* ag.c			Obfuscated source
-* ag.doc		Manual for AG
-* test.mk		Makefile test driver for AG.
-* spoiler/agag.c	Unobfuscated source
-
-
-## 12. BUGS
+## 11. BUGS
 
 The expression `(a*)*` compiles but loops forever.
 
@@ -369,7 +361,7 @@ There is no check for unbalanced brackets.  Omitting a closing bracket
 will generate a "Patern too long" error, which is not the real error.
 
 
-## 13. NOTICES
+## 12. NOTICES
 
 Public Domain 1992, 1993 by Anthony Howe.  No warranty.
 
