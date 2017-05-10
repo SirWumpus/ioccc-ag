@@ -9,6 +9,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #ifndef ARRAY
 #define ARRAY	512
