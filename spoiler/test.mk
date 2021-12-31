@@ -4,13 +4,9 @@
 #	Public Domain 1992, 1993 by Anthony Howe.  No warranty.
 #
 
-PRG	= ./ag
 SHELL	= /bin/sh
 
-all: ag char word anchor literal wild closure option branch sub class
-
-ag: ag.c
-	${CC} -o ${PRG} ${PRG}.c
+all: char word anchor literal wild closure option branch sub class
 
 #
 # Test simple text patterns without the use of meta characters.
