@@ -234,6 +234,28 @@ term(char **p)
 }
 
 /*
+ *	expr
+ *		term
+ *		expr | term
+ */
+void
+expr(char **p)
+{
+	int i, j;
+	i = new(PASS);
+	term(p);
+	while (**p == '|') {
+		++*p;
+		j = new(PASS);
+		new(STOP);
+		array[i] = JUMP(next);
+		i = new(PASS);
+		term(p);
+		array[j] = JUMP(next);
+	}
+}
+
+/*
  * If element pointed to by 'p' is CLASS, return true if 'c' is in
  * the class.  If the element is NCLASS, return true if 'c' is not
  * in the class.  Pass back the end of the character class in 'p'.
@@ -355,28 +377,6 @@ match(char *p)
 		++p;
 	}
 	return (state < 0);
-}
-
-/*
- *	expr
- *		term
- *		expr | term
- */
-void
-expr(char **p)
-{
-	int i, j;
-	i = new(PASS);
-	term(p);
-	while (**p == '|') {
-		++*p;
-		j = new(PASS);
-		new(STOP);
-		array[i] = JUMP(next);
-		i = new(PASS);
-		term(p);
-		array[j] = JUMP(next);
-	}
 }
 
 int
