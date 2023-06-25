@@ -5,21 +5,24 @@
 #
 
 SHELL=/bin/sh
-PRG=./ant
+PRG=./ag
 
-all: ant char word anchor literal wild closure option branch sub class
+all: ${PRG} char word anchor literal wild closure option branch sub class
 
 #
 # Built the entry
 #
-ant: Makefile
-	make -f Makefile ant
+${PRG}: ag.c
+	${CC} ${CFLAGS} -o ${PRG} ag.c
+
+clean:
+	rm ${PRG}
 
 #
 # Test simple text patterns without the use of meta characters.
 #
 
-empty: 
+empty:
 	$(PRG) '' ant.test.mk
 
 char:
@@ -61,13 +64,13 @@ anchor5:
 literal: literal1 literal2
 
 #
-# Every line with a dollar-sign.	
+# Every line with a dollar-sign.
 #
 literal1:
 	$(PRG) '\$$' ant.test.mk
 
 #
-# Every line with a backslash.	
+# Every line with a backslash.
 #
 literal2:
 	$(PRG) '\\' ant.test.mk
